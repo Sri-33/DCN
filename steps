@@ -1,34 +1,70 @@
-3. Open Folder in VS Code
+Here you go—**steps only**:
 
-Open VS Code
+1. **Create folder**
 
-Go to File → Open Folder...
+* Make `udp_socket` on Desktop.
 
-Select the udp_socket_project folder
+2. **Open in VS Code**
 
-VS Code will now treat this folder as your workspace.
+* VS Code → **File → Open Folder…** → select `udp_socket`.
 
-4. Run the Code
-➤ Start the Server
+3. **Show Explorer if hidden**
 
-Click on udp_server.py in the Explorer panel.
+* Press **Ctrl + B** (toggle sidebar) → click **Explorer** icon (two files).
 
-Press Run ▶️ (top right) or press Ctrl + F5.
+4. **Create files**
 
-The server terminal will appear at the bottom of VS Code.
+* In Explorer → **New File** → `udp_server.py`
+* New File → `udp_client.py`
 
-➤ Start the Client (in a new terminal)
+5. **Paste code**
 
-Open a new terminal in VS Code (Terminal → New Terminal).
+* Open `udp_server.py` → paste server code (with `SO_REUSEADDR` line).
+* Open `udp_client.py` → paste client code.
 
-Run this:
+6. **Select Python**
 
-python udp_client.py
+* **Ctrl + Shift + P** → “Python: Select Interpreter” → choose **Python 3.x**.
 
+7. **Open Terminal**
 
-or for burst mode:
+* **Terminal → New Terminal**.
 
-python udp_client.py burst 10
+8. **Run server (Terminal 1)**
 
+* `python udp_server.py`
+* Confirm: `[UDP SERVER] Listening on 0.0.0.0:9999`
 
-💡 Tip: You can also right-click → Run Python File in Terminal.
+9. **Open second terminal**
+
+* **Terminal → New Terminal** (Terminal 2 tab).
+
+10. **Run client (Terminal 2)**
+
+* Interactive: `python udp_client.py`
+* Type a message → expect `[REPLY] echo:<message>`
+
+11. **Burst test (optional)**
+
+* `python udp_client.py burst 20` (see unordered/missing replies).
+
+12. **Stop programs**
+
+* In each terminal: **Ctrl + C**.
+
+13. **If port error (10048)**
+
+* Ensure server has `SO_REUSEADDR`.
+* Or stop leftovers: `taskkill /F /IM python.exe`
+* Or change both files to `PORT = 8888`.
+
+14. **If files not visible**
+
+* **Ctrl + B** → **Ctrl + Shift + E**
+* **File → Open Folder…** (must open the folder, not a single file).
+
+15. **Firewall prompt**
+
+* When Windows asks, click **Allow access** for Python.
+
+That’s it—follow in order and you’re good.

@@ -1,0 +1,39 @@
+enable
+conf t
+hostname R1
+!
+interface g0/0
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+exit
+interface g0/1
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
+exit
+!
+! --- OPTIONAL DHCP for clients (skip if using static on PCs) ---
+! ip dhcp excluded-address 192.168.10.1 192.168.10.10
+! ip dhcp pool LAN_A
+!  network 192.168.10.0 255.255.255.0
+!  default-router 192.168.10.1
+!  dns-server 1.1.1.1
+!
+! --- ACL: Allow FTP/TFTP + ICMP to Server1, deny other traffic to server subnet ---
+ip access-list extended SERVER-GUARD
+  remark Permit FTP control (21) and data (20) to Server1
+  permit tcp 192.168.10.0 0.0.0.255 host 192.168.20.10 eq 21
+  permit tcp 192.168.10.0 0.0.0.255 host 192.168.20.10 eq 20
+  remark Permit TFTP (udp/69) to Server1
+  permit udp 192.168.10.0 0.0.0.255 host 192.168.20.10 eq 69
+  remark Allow ICMP for testing
+  permit icmp any any
+  remark Deny any other client→server-subnet traffic
+  deny   ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
+  permit ip any any
+exit
+!
+interface g0/1
+  ip access-group SERVER-GUARD in
+exit
+end
+wr

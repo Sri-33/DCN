@@ -37,3 +37,7 @@ interface g0/1
 exit
 end
 wr
+
+
+show ip interface brief
+

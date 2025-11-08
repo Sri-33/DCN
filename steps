@@ -1,0 +1,34 @@
+3. Open Folder in VS Code
+
+Open VS Code
+
+Go to File → Open Folder...
+
+Select the udp_socket_project folder
+
+VS Code will now treat this folder as your workspace.
+
+4. Run the Code
+➤ Start the Server
+
+Click on udp_server.py in the Explorer panel.
+
+Press Run ▶️ (top right) or press Ctrl + F5.
+
+The server terminal will appear at the bottom of VS Code.
+
+➤ Start the Client (in a new terminal)
+
+Open a new terminal in VS Code (Terminal → New Terminal).
+
+Run this:
+
+python udp_client.py
+
+
+or for burst mode:
+
+python udp_client.py burst 10
+
+
+💡 Tip: You can also right-click → Run Python File in Terminal.
